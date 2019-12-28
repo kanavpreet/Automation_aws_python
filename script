@@ -1,0 +1,44 @@
+import boto3
+ec2 =boto.resource('ec2')
+instance =ec2.create_instances(
+Image id=""
+MinCount=1
+MaxCount=100
+InstanceType='t2.micro'
+)
+
+print(instance[0].id)
+
+#####Create Voulme id
+response =ec2.create_volume(
+AvailabilityZone='string',
+    Encrypted=True,
+    #Iops=123,
+    #KmsKeyId='string',
+    OutpostArn='string',
+    #Size=123,
+    #SnapshotId='string',
+    VolumeType='standard'|'io1'|'gp2'|'sc1'|'st1',
+    #DryRun=True|False,
+    TagSpecifications=[
+        {
+            'ResourceType': 'client-vpn-endpoint'|'customer-gateway'|'dedicated-host'|'dhcp-options'|'elastic-ip'|'fleet'|'fpga-image'|'host-reservation'|'image'|'instance'|'internet-gateway'|'key-pair'|'launch-template'|'natgateway'|'network-acl'|'network-interface'|'placement-group'|'reserved-instances'|'route-table'|'security-group'|'snapshot'|'spot-fleet-request'|'spot-instances-request'|'subnet'|'traffic-mirror-filter'|'traffic-mirror-session'|'traffic-mirror-target'|'transit-gateway'|'transit-gateway-attachment'|'transit-gateway-multicast-domain'|'transit-gateway-route-table'|'volume'|'vpc'|'vpc-peering-connection'|'vpn-connection'|'vpn-gateway',
+            'Tags': [
+                {
+                    'Key': 'string',
+                    'Value': 'string'
+                },
+            ]
+        },
+    ]
+)
+
+
+
+#####Attach Volume
+response = ec2.attach_volume(
+    Device='/dev/sdh',
+    InstanceId='instance[0].id',
+    VolumeId='string',
+    #DryRun=True|False
+)
